@@ -2,6 +2,7 @@
 title: Setup
 ---
 
+
 There are two pre-requisites for this workshop:
 
 1. Installing SingularityCE/Apptainer locally on your laptop so you can build container images - note: you must have access to a laptop where you have admin/root privileges.
@@ -183,6 +184,7 @@ Once this has been done, you should be sent an email. _If you have not received 
 ### Log into ARCHER2
 
 You should now be able to log into ARCHER2 by following the [login instructions in the ARCHER2 documentation](https://docs.archer2.ac.uk/user-guide/connecting/#ssh-clients).
+
 
 
 {% include links.md %}
