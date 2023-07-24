@@ -10,7 +10,7 @@ There are two pre-requisites for this workshop:
 
 Below, we cover instructions for setting up SingularityCE/Apptainer on your laptop and how to sign up for an account on ARCHER2 if you need it.
 
-## Install SingularityCE/Apptainer on your laptop
+## Install SingularityCE/Apptainer on your laptop
 
 Note: you must have admin/root privileges on the laptop you are using to install SingularityCE/Apptainer. For Linux and Windows, we provide instructions for installing SingularityCE and for macOS, we provide instructions for installing Apptainer. SingularityCE and Apptainer are currently mutually compatible but this may change in the future.
 
@@ -144,7 +144,7 @@ export VERSION=3.11.4 && \
 
 SingularityCE should now be available within WSL2 on your system.
 
-## Getting an account on ARCHER2
+## Getting an account on ARCHER2
 
 ### Sign up for a SAFE account
 
