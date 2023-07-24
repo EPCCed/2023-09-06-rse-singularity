@@ -22,11 +22,13 @@ This lesson will introduce Singularity from scratch showing you how to run a sim
 ## Course details
 
  - Dates:
-   + 1400-1630, Wed 21 June 2023
-   + 1000-1600, Thu 22 June 2023
+   + 6 September 2023
  - Location:
-   + Vendrik C + D, [Studiecentrum, Radboud UMC, Nijmagen, NL](https://www.radboudumc.nl/ingangen/studiecentrum)
- - Instructor: Andy Turner, EPCC, University of Edinburgh, UK
+   + RSECon23, Swansea Bay Campus, Swansea University
+ - Instructors:
+   + Jeremy Cohen, Imperial College London, UK
+   + Andy Turner, EPCC, University of Edinburgh, UK
+   + Chris Wood, EPCC, University of Edinburgh, UK
 
 
 {% include links.md %}
