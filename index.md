@@ -13,10 +13,27 @@ This lesson will introduce Singularity from scratch showing you how to run a sim
 {% comment %} This is a comment in Liquid {% endcomment %}
 
 > ## Prerequisites
-> You should have basic familiarity with using a command shell, and the lesson text will at times request that you "open a shell window", with an assumption that you know what this means.
-> Under Linux or macOS it is assumed that you will access a bash shell (usually the default), using your Terminal application.
+> You should have basic familiarity with using a command shell, and the lesson
+> text will at times request that you "open a shell window", with an assumption
+> that you know what this means.
+> Under Linux or macOS it is assumed that you will access a bash shell (usually
+> the default), using your Terminal application.
 > Under Windows, Powershell or WSL should allow you to use the Unix instructions.
-> The lessons will sometimes request that you use a text editor to create or edit files in particular directories. It is assumed that you either have an editor that you know how to use that runs within the working directory of your shell window (e.g. nano), or that if you use a graphical editor, that you can use it to read and write files into the working directory of your shell.
+> The lessons will sometimes request that you use a text editor to create or
+> edit files in particular directories. It is assumed that you either have an
+> editor that you know how to use that runs within the working directory of
+> your shell window (e.g. nano), or that if you use a graphical editor, that
+> you can use it to read and write files into the working directory of your
+> shell.
+> 
+> **Software installation**
+>
+> We recommend that you install Singularity/Apptainer locally on your system to
+> participate in this tutorial. While the application is designed to run only
+> on Linux, you install it on macOS via [Lima](https://lima-vm.io/) and on
+> Windows via [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
+> **See the [setup page](setup.html) for this lesson for detailed
+> instructions.**
 {: .prereq}
 
 ## Course details
