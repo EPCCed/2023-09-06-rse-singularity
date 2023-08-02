@@ -28,7 +28,7 @@ keypoints:
 >
 > [How can software containers help your research?](https://www.youtube.com/watch?v=HelrQnm3v4g)
 >
-> Australian Research Data Commons, 2021. *How can software containers help your research?*. [video] Available at: https://www.youtube.com/watch?v=HelrQnm3v4g DOI: http://doi.org/10.5281/zenodo.5091260
+> Australian Research Data Commons, 2021. *How can software containers help your research?*. [video] Available at: https://www.youtube.com/watch?v=HelrQnm3v4g DOI: [http://doi.org/10.5281/zenodo.5091260](http://doi.org/10.5281/zenodo.5091260)
 {: .callout}
 
 
@@ -44,7 +44,7 @@ keypoints:
 
 You may have come up with some of the following:
 
-- you want to use software that doesn't exist for the operating system (Mac, Windows, Linux) you'd prefer.
+- you want to use software that doesn't exist for the operating system (Mac, Windows, Linux) you'd prefer or need to use.
 - you struggle with installing a software tool because you have to install a number of other dependencies first. Those dependencies, in turn, require *other* things, and so on (i.e. combinatoric explosion).
 - the software you're setting up involves many dependencies and only a subset of all possible versions of those dependencies actually works as desired.
 - you're not actually sure what version of the software you're using because the install process was so circuitous.
@@ -52,11 +52,14 @@ You may have come up with some of the following:
 - you installed everything correctly on your computer but now need to install it on a colleague's computer/campus computing cluster/etc.
 - you've written a package for other people to use but a lot of your users frequently have trouble with installation.
 - you need to reproduce a research project from a former colleague and the software used was on a system you no longer have access to.
+- you are struggling to understand what you need to do to install or use a
+  piece of software because there is missing, insufficient or unclear
+  documentation.
 
 A lot of these characteristics boil down to one fact: the main program you want
-to use likely depends on many, many, different other programs (including the
-operating system!), creating a very complex, and often fragile system. One change
-or missing piece may stop the whole thing from working or break something that was
+to use likely depends on many other different programs (including the operating
+system!), creating a very complex, and often fragile system. One change or
+missing piece may stop the whole thing from working or break something that was
 already running. It's no surprise that this situation is sometimes
 informally termed "dependency hell".
 
@@ -71,13 +74,15 @@ informally termed "dependency hell".
 Unsurprisingly, software installation and configuration challenges can have
 negative consequences for research:
 - you can't use a specific tool at all, because it's not available or installable.
-- you can't reproduce your results because you're not sure what tools you're actually using.
+- you can't reproduce your results because you're not sure what tools or
+  configuration options you're actually using.
 - you can't access extra/newer resources because you're not able to replicate your software set up.
 - others cannot validate and/or build upon your work because they cannot recreate your system's unique configuration.
 
 Thankfully there are ways to get underneath (a lot of) this mess: containers
-to the rescue! Containers provide a way to package up software dependencies
-and access to resources such as files and communications networks in a uniform manner.
+to the rescue! Containers provide a way to package up software and its
+dependencies while also offering ways to provide access to resources such as
+files and communications networks in a uniform manner.
 
 ## What is a Container?
 
@@ -125,14 +130,17 @@ the container software installed (the 'container host'), and it should "just wor
 {: .callout}
 
 One final term: while the **container** is an alternative filesystem layer that you
-can access and run from your computer, the **container image** is the 'recipe' or template
-for a container. The container image has all the required information to start
-up a running copy of the container. A running container tends to be transient
-and can be started and shut down. The container image is more long-lived, as a definition for the container.
+can access and run from your computer, the **container image** is the template
+for a container. The container image has all the required information,
+including the necessary files, encapsulated within a digital "object". This can
+then be used to start up a running copy of the container. A running container
+tends to be transient and can be started and shut down. The container image is
+more long-lived, as a template that can be used for creating containers.
 You could think of the container image like a cookie cutter -- it
 can be used to create multiple copies of the same shape (or container)
-and is relatively unchanging, where cookies come and go. If you want a
-different type of container (cookie) you need a different container image (cookie cutter).
+and remains unchanged, where cookies come and go. If you want a
+different type of container (cookie) you need a different container image
+(cookie cutter).
 
 
 ## Putting the Pieces Together
@@ -148,7 +156,7 @@ tools into containers?
 This solves several of our problems:
 
 - documentation -- there is a clear record of what software and software dependencies were used, from bottom to top.
-- portability -- the container can be used on any computer that has Docker installed -- it doesn't matter whether the computer is Mac, Windows or Linux-based.
+- portability -- the container can be used on any computer on which Singularity/Apptainer can be installed. 
 - reproducibility -- you can use the exact same software and environment on your computer and on other resources (like a large-scale computing cluster).
 - configurability -- containers can be sized to take advantage of more resources (memory, CPU, etc.) on large systems (clusters) or less, depending on the circumstances.
 
@@ -165,8 +173,8 @@ a research context include:
 - Using containers solely on your own computer to use a specific software tool
   or to test out a tool (possibly to avoid a difficult and complex installation
   process, to save your time or to avoid dependency hell).
-- Creating a recipe that generates a container image with software that you
-  specify installed, then sharing a container image generated using this Dockerfile with
+- Creating a "recipe" that generates a container image with software that you
+  specify installed, then sharing the generated container image with
   your collaborators for use on their computers or a remote computing resource
   (e.g. cloud-based or HPC system).
 - Archiving the container images so you can repeat analysis/modelling using the
