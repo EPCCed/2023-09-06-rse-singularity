@@ -134,9 +134,9 @@ Singularity uses the [Singularity Image Format (SIF)](https://github.com/sylabs/
 > Note that in addition to providing a repository that you can pull container images from, [Sylabs Cloud Library](https://cloud.sylabs.io/) can also build Singularity images for you from a *recipe* - a configuration file defining the steps to build an image. We will look at recipes and building images later in the workshop.
 {: .callout}
 
-### Pulling a container image from Sylabs Cloud Library
+### Pulling a container image from a remote library
 
-Let's begin by creating a `test` directory, changing into it and _pulling_ an existing container image from Sylabs Cloud Library:
+Let's begin by creating a `test` directory, changing into it and _pulling_ an existing container image from a remote library:
 
 ~~~
 $ mkdir test
@@ -160,7 +160,13 @@ INFO:    Creating SIF file...
 ~~~
 {: .output}
 
-What just happened? We pulled a container image from a remote repository using the `singularity pull` command and directed it to store the container image in a file using the name `lolcow.sif` in the current directory. If you run the `ls` command, you should see that the `lolcow.sif` file is now present in the current directory.
+What just happened? We pulled a container image from a remote repository (in this case, stored on githib using their packages feature) using the `singularity pull` command and directed it to store the container image in a file using the name `lolcow.sif` in the current directory. If you run the `ls` command, you should see that the `lolcow.sif` file is now present in the current directory.
+
+> ## Why is the protocol `docker://`?
+> 
+> The OCI format has become the defacto standard for distributing containers - this has evolved from the format
+Docker originally developed. We need to tell Apptainer when we want to convert remote containers that are saved in OCI format into its native format - we do that using the `docker://` syntax
+{: .callout}
 
 ~~~
 $ ls -lh
@@ -196,13 +202,14 @@ $ singularity run lolcow.sif
 
 The above command ran a *lolcow* container based on the container image we downloaded from the online repository and the resulting output was shown. 
 
-~~~
-You _may_ see a warning such as:
-
-```
-INFO:    underlay of /etc/localtime required more than 50 (77) bind mounts
-```
-~~~
+> ## Extra warnings
+> You _may_ see a warning such as:
+> 
+> ```
+> INFO:    underlay of /etc/localtime required more than 50 (77) bind mounts
+> ```
+>
+> We will explain `mounts` and what this info statement means later in the workshop
 {: .callout}
 
 What just happened? When we use the `singularity run` command, Singularity does three things:
