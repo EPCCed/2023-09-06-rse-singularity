@@ -10,7 +10,7 @@
 carpentry: "incubator"   # "swc" in future
 
 # Overall title for pages.
-title: "Reproducible computational environments using containers: Introduction to Singularity"
+title: "Reproducible computational environments using containers: Introduction to Singularity for RSEs"
 
 # Life cycle stage of the lesson
 # See this page for more details: https://cdh.carpentries.org/the-lesson-life-cycle.html
@@ -105,7 +105,6 @@ remote_theme: carpentries/carpentries-theme@main
 episode_order:
   - introduction
   - singularity-gettingstarted
-  - singularity-shell
   - singularity-docker
   - singularity-cache
   - singularity-files
