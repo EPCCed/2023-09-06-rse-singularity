@@ -1,5 +1,5 @@
 ---
-title: "The Singularity cache"
+title: "[Optional] The Singularity cache"
 teaching: 10
 exercises: 0
 questions:
