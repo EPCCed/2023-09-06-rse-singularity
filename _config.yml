@@ -112,7 +112,7 @@ episode_order:
   - using-singularity-review
   - singularity-blast
   - creating-container-images
-  - advanced-containers
+  # - advanced-containers [Now incorporated into creating-container-images above]
   - reproducibility
   - advanced-topics
 
