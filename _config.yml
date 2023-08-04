@@ -107,13 +107,14 @@ episode_order:
   - singularity-gettingstarted
   - singularity-shell
   - singularity-docker
-  - singularity-cache
   - singularity-files
-  - using-singularity-review
-  - singularity-blast
   - creating-container-images
   - advanced-containers
+  - singularity-mpi
   - reproducibility
+  - singularity-cache
+  - singularity-blast
   - advanced-topics
+
 
 
