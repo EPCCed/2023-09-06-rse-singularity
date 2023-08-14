@@ -108,7 +108,6 @@ episode_order:
   - singularity-docker
   - singularity-files
   - creating-container-images
-  - advanced-containers
   - singularity-mpi
   - reproducibility
   - singularity-cache
