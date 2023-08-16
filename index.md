@@ -25,6 +25,9 @@ This lesson will introduce Singularity from scratch showing you how to run a sim
 > your shell window (e.g. nano), or that if you use a graphical editor, that
 > you can use it to read and write files into the working directory of your
 > shell.
+>
+> You should be familiar with logging into remote systems via SSH and copying 
+> data to remote systems using "scp" or similar tools.
 > 
 > **Software installation**
 >
@@ -44,6 +47,7 @@ This lesson will introduce Singularity from scratch showing you how to run a sim
    + RSECon23, Swansea Bay Campus, Swansea University
  - Instructors:
    + Jeremy Cohen, Imperial College London, UK
+   + Harvey Richardson 
    + Andy Turner, EPCC, University of Edinburgh, UK
    + Chris Wood, EPCC, University of Edinburgh, UK
 
