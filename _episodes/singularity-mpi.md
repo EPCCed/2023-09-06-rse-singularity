@@ -293,24 +293,45 @@ export SINGULARITYENV_LD_LIBRARY_PATH="/opt/cray/pe/mpich/8.1.23/ofi/gnu/9.1/lib
 
 This has demonstrated that we can successfully run a parallel MPI executable from within a Singularity container.
 
-> ## Investigate performance of native benchmark comapred to containerised version
+> ## Investigate performance of native benchmark compared to containerised version
 > 
 > To get an idea of any difference in performance between the code within your Singularity image and the same
-> code built natively on the target HPC platform, try running the `osu_allreduce` benchmarks natively on ARCHER2.
-> Then try running the same benchmark that you ran via the Singularity container. Have a look at the outputs you
-> get when running `collective/osu_gather` or one of the other collective benchmarks to get an idea of whether
-> there is a performance difference and how significant it is.
-> 
-> Try running with 16 nodes and 128 MPI processes per node.
+> code built natively on the target HPC platform, try running the `osu_allreduce` benchmarks natively on ARCHER2
+> on at least 16 nodes (if you want to use more than 32 nodes, you will need to use the `standard` QoS rather than
+> the `short QoS`). Then try running the same benchmark that you ran via the Singularity container. Do you see any
+> performance differences?
 > 
 > What do you see?
+>
+> Note: a native version of the OSU micro-benchmark suite is available on ARCHER2 via `module load osu-benchmarks`.
 > 
 > > ## Discussion
-> > You may find that performance is significantly better with the version of the code built directly on the HPC platform. Alternatively, performance may be similar between the two versions.
 > > 
-> > How big is the performance difference between the two builds of the code?
+> > Here are some selected results measured on ARCHER2:
 > > 
-> > What might account for any difference in performance between the two builds of the code?
+> >  16 nodes:
+> > - 4 B
+> >   + Native: 17.66 us
+> >   + Container: 18.15 us (3% slower)
+> > - 128 KiB
+> >   + Native: 237.29 us
+> >   + Container: 303.92 us (22% slower)
+> > - 1 MiB
+> >   + Native: 1501.25 us
+> >   + Container: 2359.11 us (36% slower)
+> >  32 nodes:
+> > - 4 B
+> >   + Native: 30.72 us
+> >   + Container: 24.41 us (20% faster)
+> > - 128 KiB
+> >   + Native: 265.36 us
+> >   + Container: 363.58 us (26% slower)
+> > - 1 MiB
+> >   + Native: 1520.58 us
+> >   + Container: 2429.24 us (36% slower)
+> >
+> > For the medium and large messages, using a container produces substantially worse MPI performance for this 
+> > benchmark on ARCHER2. 
 > > 
 > {: .solution}
 {: .challenge}
