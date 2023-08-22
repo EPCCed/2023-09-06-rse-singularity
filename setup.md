@@ -150,7 +150,7 @@ SingularityCE should now be available within WSL2 on your system.
 
 To sign up, you must first register for an account on [SAFE](https://safe.epcc.ed.ac.uk/) (our service administration web application):
 
-If you are already registered on the ARCHER or Tier-2 SAFE you do not need to re-register. Please proceed to the next step.
+If you are already registered on the EPCC SAFE you do not need to re-register. Please proceed to the next step.
 
 1. Go to the [SAFE New User Signup Form](https://safe.epcc.ed.ac.uk/signup.jsp)
 2. Fill in your personal details. You can come back later and change them if you wish. _**Note:** you should register using your institutional or company email address - email domains such as gmail.com, outlook.com, etc. are not allowed to be used for access to ARCHER2_
@@ -166,7 +166,7 @@ you request the account
 
 1. [Login to SAFE](https://safe.epcc.ed.ac.uk)
 2. Go to the Menu "Login accounts" and select "Request login account"
-3. Choose the `TBC` project “Choose Project for Machine Account” box and click "Next"
+3. Choose the `ta121` project “Choose Project for Machine Account” box and click "Next"
 4.  Select the *ARCHER2* machine in the list of available machines
 5.  Click *Next*
 6.  Enter a username for the account and an SSH public
