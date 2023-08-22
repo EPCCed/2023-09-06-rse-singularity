@@ -297,11 +297,13 @@ This has demonstrated that we can successfully run a parallel MPI executable fro
 > 
 > To get an idea of any difference in performance between the code within your Singularity image and the same
 > code built natively on the target HPC platform, try running the `osu_allreduce` benchmarks natively on ARCHER2
-> on at least 16 nodes (if you want to use more than 32 nodes, you will need to use the `standard` QoS rather than
-> the `short QoS`). Then try running the same benchmark that you ran via the Singularity container. Do you see any
-> performance differences?
+> on all cores on at least 16 nodes (if you want to use more than 32 nodes, you will need to use the `standard` QoS
+> rather than the `short QoS`). Then try running the same benchmark that you ran via the Singularity container. Do
+> you see any performance differences?
 > 
 > What do you see?
+>
+> Do you see the same when you run on small node counts - particularly a single node?
 >
 > Note: a native version of the OSU micro-benchmark suite is available on ARCHER2 via `module load osu-benchmarks`.
 > 
@@ -331,15 +333,26 @@ This has demonstrated that we can successfully run a parallel MPI executable fro
 > >   + Container: 2429.24 us (36% slower)
 > >
 > > For the medium and large messages, using a container produces substantially worse MPI performance for this 
-> > benchmark on ARCHER2. 
+> > benchmark on ARCHER2. When the messages are very small, containers match the native performance and can
+> > actually be faster.
+> >
+> > Is this true for other MPI benchmarks that use all the cores on a node or is it specific to Allreduce?
 > > 
 > {: .solution}
 {: .challenge}
 
-If performance is an issue for you with codes that you'd like to run via Singularity, you are advised to take a look at using the _[bind model](https://sylabs.io/guides/3.5/user-guide/mpi.html#bind-model)_ for building/running MPI applications through Singularity.
+### Summary
 
-## Singularity wrap-up
+Singularity can be combined with MPI to create portable containers that run software in parallel across multiple
+compute nodes. However, there are some limitations, specifically:
 
-This concludes the 8 episodes of the course covering Singularity. We hope you found this information useful and that it has inspired you to use Singularity to help enhance the way you build/work with research software.
+- You must use an MPI library in the container that is binary compatible with the MPI library on the host system - 
+  typically, your container will be based on either MPICH or OpenMPI.
+- The host setup to enable MPI typically requires binding a large number of low-level libraries into the running 
+  container. You will usually require help from the HPC system support team to get the correct bind options for
+  the platform you are using.
+- Performance of containers+MPI can be substantially lower than the performance of native applications using MPI
+  on the system. The effect is dependent on the MPI routines used in your application, message sizes and the number of MPI 
+  processes used.
 
-As a new set of material, we appreciate that there are likely to be improvements that can be made to enhance the quality of this material. We welcome your thoughts, suggestions and feedback on improvements that could be made to help others making use of these lessons.
+  
