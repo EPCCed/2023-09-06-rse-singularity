@@ -171,11 +171,7 @@ you request the account
 5.  Click *Next*
 6.  Enter a username for the account and an SSH public
     key
-    1.  If you do not specify an SSH key at this stage, your default
-        key will be used (if you have one). For users who had an ARCHER
-        account, the default key will be your ARCHER SSH key.
-    2.  You can always add an SSH key (or additional SSH keys) using
-        the process described below.
+    1.  You can always add an SSH key (or additional SSH keys) after your account has been created.
 7.  Click *Request*
 
 Now you have to wait for the course organiser to accept your request to register. When this has happened,your account will be created on ARCHER2.
