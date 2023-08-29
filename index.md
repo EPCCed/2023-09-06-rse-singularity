@@ -47,9 +47,10 @@ This lesson will introduce Singularity from scratch showing you how to run a sim
    + RSECon23, Swansea Bay Campus, Swansea University
  - Instructors:
    + Jeremy Cohen, Imperial College London, UK
-   + Harvey Richardson 
    + Andy Turner, EPCC, University of Edinburgh, UK
    + Chris Wood, EPCC, University of Edinburgh, UK
+   + Harvey Richardson, HPE
+   + Ian Cockshott, HPE
 
 
 {% include links.md %}
