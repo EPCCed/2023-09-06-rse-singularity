@@ -160,7 +160,7 @@ INFO:    Creating SIF file...
 ~~~
 {: .output}
 
-What just happened? We pulled a container image from a remote repository (in this case, stored on githib using their packages feature) using the `singularity pull` command and directed it to store the container image in a file using the name `lolcow.sif` in the current directory. If you run the `ls` command, you should see that the `lolcow.sif` file is now present in the current directory.
+What just happened? We pulled a container image from a remote repository (in this case, stored on GitHub using their packages feature) using the `singularity pull` command and directed it to store the container image in a file using the name `lolcow.sif` in the current directory. If you run the `ls` command, you should see that the `lolcow.sif` file is now present in the current directory.
 
 > ## Why is the protocol `docker://`?
 > 
