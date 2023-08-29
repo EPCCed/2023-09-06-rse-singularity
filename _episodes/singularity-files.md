@@ -107,7 +107,7 @@ Host system:                                                      Singularity co
 > > the files in the `/` directory are owned by `root`, as you would probably expect on any Linux system. If you look at the files in your home
 > > directory, they should be owned by you.
 > >
-> > **A Ex1:** We've already seen from the previous answer that the files in `/` are owned by `root` so we would nott expect to be able to create
+> > **A Ex1:** We've already seen from the previous answer that the files in `/` are owned by `root` so we would not expect to be able to create
 > > files there if we're not the root user. However, if you tried to remove `/singularity` you would have seen an error similar to the following:
 > > `cannot remove '/singularity': Read-only file system`. This tells us something else about the filesystem. It's not just that we do not have
 > > permission to delete the file, the filesystem itself is read-only so even the `root` user would not be able to edit/delete this file. We will
