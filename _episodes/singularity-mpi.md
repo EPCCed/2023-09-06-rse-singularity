@@ -28,7 +28,7 @@ or you use applications that have been compiled by the HPC system support team. 
 However, compiling complex HPC applications that have lots of dependencies (including MPI) is not always straightforward
 and can be a significant challenge as most HPC systems differ in various ways in terms of OS and base software
 available. There are a number of different approaches that can be taken to make it easier to deploy applications
-on HPC systems; for example, the [Spack]() software automates the dependency resolution and compilation of
+on HPC systems; for example, the [Spack](https://spack.readthedocs.io) software automates the dependency resolution and compilation of
 applications. Containers provide another potential way to resolve these problems but care needs to be taken 
 when interfacing with MPI on the host system which adds more complexity to running containers in parallel on
 HPC systems.
@@ -269,7 +269,7 @@ export SINGULARITYENV_LD_LIBRARY_PATH="/opt/cray/pe/mpich/8.1.23/ofi/gnu/9.1/lib
 > ~~~
 > {: .language-bash}
 > 
-> > ## Expected output and discussion
+> > ## Solution
 > > 
 > > As you can see in the mpirun command shown above, we have called `srun` on the host system
 > > and are passing to MPI the `singularity` executable for which the parameters are the image
@@ -311,6 +311,17 @@ This has demonstrated that we can successfully run a parallel MPI executable fro
 > > 
 > > Here are some selected results measured on ARCHER2:
 > > 
+> >  1 node:
+> > - 4 B
+> >   + Native: 6.13 us
+> >   + Container: 5.30 us (16% faster)
+> > - 128 KiB
+> >   + Native: 173.00 us
+> >   + Container: 230.38 us (25% slower)
+> > - 1 MiB
+> >   + Native: 1291.18 us
+> >   + Container: 2101.02 us (39% slower)
+> >
 > >  16 nodes:
 > > - 4 B
 > >   + Native: 17.66 us
@@ -321,6 +332,7 @@ This has demonstrated that we can successfully run a parallel MPI executable fro
 > > - 1 MiB
 > >   + Native: 1501.25 us
 > >   + Container: 2359.11 us (36% slower)
+> >
 > >  32 nodes:
 > > - 4 B
 > >   + Native: 30.72 us
@@ -355,4 +367,4 @@ compute nodes. However, there are some limitations, specifically:
   on the system. The effect is dependent on the MPI routines used in your application, message sizes and the number of MPI 
   processes used.
 
-  
+
