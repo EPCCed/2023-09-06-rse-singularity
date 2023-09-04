@@ -85,6 +85,7 @@ From: ubuntu:20.04
     export PATH=/usr/local/libexec/osu-micro-benchmarks/mpi/collective:$PATH
 
 %post
+    export DEBIAN_FRONTEND=noninteractive TZ=Europe/London
     # Install required dependencies
     apt-get update && apt-get install -y --no-install-recommends \
         apt-utils \
@@ -99,21 +100,24 @@ From: ubuntu:20.04
     apt-get install -y autoconf automake build-essential numactl libnuma-dev autoconf automake gcc g++ git libtool
 
     # Download and build an ABI compatible MPICH
-    curl -sSLO http://www.mpich.org/static/downloads/3.4.2/mpich-3.4.2.tar.gz \
+    cd /
+    curl -k -sSLO http://www.mpich.org/static/downloads/3.4.2/mpich-3.4.2.tar.gz \
         && tar -xzf mpich-3.4.2.tar.gz -C /root \
         && cd /root/mpich-3.4.2 \
         && ./configure --prefix=/usr --with-device=ch4:ofi --disable-fortran \
         && make -j8 install \
+        && cd / \
         && rm -rf /root/mpich-3.4.2 \
         && rm /mpich-3.4.2.tar.gz
 
     # Download and build OSU benchmarks
-    curl -sSLO http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-5.4.1.tar.gz \
+    curl -k -sSLO http://mvapich.cse.ohio-state.edu/download/mvapich/osu-micro-benchmarks-5.4.1.tar.gz \
         && tar -xzf osu-micro-benchmarks-5.4.1.tar.gz -C /root \
         && cd /root/osu-micro-benchmarks-5.4.1 \
         && ./configure --prefix=/usr/local CC=/usr/bin/mpicc CXX=/usr/bin/mpicxx \
         && cd mpi \
         && make -j8 install \
+        && cd / \
         && rm -rf /root/osu-micro-benchmarks-5.4.1 \
         && rm /osu-micro-benchmarks-5.4.1.tar.gz
 
