@@ -27,10 +27,50 @@ There are lots of reasons why you might want to create your **own** Singularity 
 - You want to have a container image to "archive" all the specific software versions you ran for a project.
 - You want to share your workflow with someone else.
 
+> ## Building using Docker rather than Singularity
+>
+> An alternative to building container images using Singularity itself is to use Docker to build the images
+> that you then run using Singularity. This has a number of advantages:
+> * Docker/Docker Desktop is often easier to install than SingularityCE/Apptainer (particularly on macOS/Windows systems)
+> * Docker can build cross-platform - you can build container images for x86 systems on Arm-based systems (such as Mac M1/M2 systems)
+> * Docker is generally more efficient in dealing with uploading/downloading container image data that makes it better
+>   for moving your container images to remote HPC facilities
+>
+> This session primarily uses Singularity to build the container images but we also provide the equivalent 
+> Dockerfiles in case you want to build container images using Docker rather than Singularity.
+>
+> > ## Building and uploading images using Docker
+> > 
+> > Typically, you will build using Docker with a command such as (assuming you are issuing the command
+> > from the same directory as the Dockerfile and that your Docker Hub username is `alice`):
+> >
+> > ```
+> > docker image build --platform linux/amd64 -t alice/image-name .
+> > ```
+> >
+> > You can then push your built image to Docker Hub with:
+> >
+> > ```
+> > docker push alice/image-name
+> > ```
+> >
+> > Finally, you can log into the remote system and build a Singularity image from the image on Docker
+> > Hub with:
+> >
+> > ```
+> > singularity build image-name.sif docker://alice/image-name
+> > ```
+> >
+> > You can also build directory from a tar archive exported from Docker using the `docker-archive` image
+> > type if you do not want to upload via Docker Hub or another online repository.
+> > 
+> {: .solution}
+{: .callout}
+
 ## Starting with a basic Alpine Linux image
 
 Before creating a reproducible installation, let's start with a minimal Linux container image.
-Create a Signularity container image from an `alpine` Docker container image:
+Create a Singularity container image from an `alpine` Docker container image:
 
 ~~~
 singularity pull alpine.sif docker://alpine 
@@ -182,6 +222,20 @@ Let's break this file down:
   run`). In this case, we ask the container to return the version of Python
   installed in the container.
 
+> ## Build with Docker
+>
+> > ## Dockerfile
+> >
+> > ```
+> > FROM alpine:latest
+> >
+> > RUN apk add --update python3 py3-pip python3-dev
+> >
+> > CMD ["python3", "--version"]
+> > ```
+> {: .solution}
+{: .callout}
+
 
 ## Extending our recipe file
 
@@ -247,6 +301,22 @@ copied to the target location `/home` inside the container image that will be
 built based on this recipe file. Multiple lines can be added to the `%files`
 section to have additional files copied from the host filesystem into the
 container image.
+
+> ## Build with Docker
+>
+> > ## Dockerfile
+> >
+> > ```
+> > FROM alpine:latest
+> >
+> > COPY sum.py /home
+> > 
+> > RUN apk add --update python3 py3-pip python3-dev
+> >
+> > CMD ["python3", "--version"]
+> > ```
+> {: .solution}
+{: .callout}
 
 Note that it's not necessarily a good idea to put your scripts inside the
 container image if you're constantly changing or editing them. In this case, 
@@ -524,6 +594,22 @@ be used to run a given command and it can also operate reliably across
 different platforms that have Singularity or Apptainer installed.
 
 <br/><br/>
+
+> ## Build with Docker
+>
+> > ## Dockerfile
+> >
+> > ```
+> > FROM alpine:latest
+> >
+> > COPY sum.py /home
+> >
+> > RUN apk add --update python3 py3-pip python3-dev
+> >
+> > ENTRYPOINT ["python3", "/home/sum.py"]
+> > ```
+> {: .solution}
+{: .callout}
 
 ## Some additional notes and warnings
 
