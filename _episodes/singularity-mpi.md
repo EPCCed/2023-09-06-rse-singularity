@@ -298,7 +298,7 @@ ARCHER2.
 > 
 > #SBATCH --partition=standard
 > #SBATCH --qos=short
-> #SBATCH --account=[budget code]
+> #SBATCH --account=ta121
 > 
 > # Load the module to make the Cray MPICH ABI available
 > module load cray-mpich-abi
