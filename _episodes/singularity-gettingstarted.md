@@ -141,7 +141,7 @@ Let's begin by creating a `test` directory, changing into it and _pulling_ an ex
 ~~~
 $ mkdir test
 $ cd test
-$ singularity pull lolcow.sif docker://ghcr.io/apptainer/lolcow
+$ singularity pull hello-world.sif docker://hello-world
 ~~~
 {: .language-bash}
 
@@ -149,18 +149,16 @@ $ singularity pull lolcow.sif docker://ghcr.io/apptainer/lolcow
 INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 Getting image source signatures
-Copying blob 5ca731fc36c2 done  
-Copying blob 16ec32c2132b done  
-Copying config fd0daa4d89 done  
+Copying blob 70f5ac315c5a done  
+Copying config 286cc18214 done  
 Writing manifest to image destination
 Storing signatures
-2023/08/03 17:22:15  info unpack layer: sha256:16ec32c2132b43494832a05f2b02f7a822479f8250c173d0ab27b3de78b2f058
-2023/08/03 17:22:18  info unpack layer: sha256:5ca731fc36c28789c5ddc3216563e8bfca2ab3ea10347e07554ebba1c953242e
+2023/09/06 14:59:34  info unpack layer: sha256:70f5ac315c5af948332962ff4678084ebcc215809506e4b8cd9e509660417205
 INFO:    Creating SIF file...
 ~~~
 {: .output}
 
-What just happened? We pulled a container image from a remote repository (in this case, stored on GitHub using their packages feature) using the `singularity pull` command and directed it to store the container image in a file using the name `lolcow.sif` in the current directory. If you run the `ls` command, you should see that the `lolcow.sif` file is now present in the current directory.
+What just happened? We pulled a container image from a remote repository (in this case, stored on Docker Hub) using the `singularity pull` command and directed it to store the container image in a file using the name `hello-world.sif` in the current directory. If you run the `ls` command, you should see that the `hello-world.sif` file is now present in the current directory.
 
 > ## Why is the protocol `docker://`?
 > 
@@ -175,28 +173,45 @@ $ ls -lh
 
 ~~~
 total 72M
--rwxr-xr-x. 1 auser group 72M Jun 20 17:22 lolcow.sif
+-rwxr-xr-x. 1 auser group   45056 Sep  6 15:00 hello-world.sif
 ~~~
 {: .output}
 
 ### Running a Singularity container
 
-We can now run a container based on the `lolcow.sif` container image:
+We can now run a container based on the `hello-world.sif` container image:
 
 ~~~
-$ singularity run lolcow.sif
+$ singularity run hello-world.sif
 ~~~
 {: .language-bash}
 
 ~~~
- ______________________________
-< Tue Jun 20 08:44:51 UTC 2023 >
- ------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+WARNING: passwd file doesn't exist in container, not updating
+WARNING: group file doesn't exist in container, not updating
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (arm64v8)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+
 ~~~
 {: .output}
 
@@ -225,40 +240,41 @@ How did the container determine what to do when we ran it? What did running the 
 When you run a container from a Singularity container image using the `singularity run` command, the container runs the default run script that is embedded within the container image. This is a shell script that can be used to run commands, tools or applications stored within the container image on container startup. We can inspect the container image's run script using the `singularity inspect` command:
 
 ~~~
-$ singularity inspect -r lolcow.sif
+$ singularity inspect -r hello-world.sif
 ~~~
 {: .language-bash}
 
-This shows us the script within the `lolcow.sif` image configured to run by default when we use the `singularity run` command.
+This shows us the script within the `hello-world.sif` image configured to run by default when we use the `singularity run` command.
 
 ## Running specific commands within a container
 
 We now know that we can use the `singularity inspect` command to see the run script that a container is configured to run by default. What if we want to run a different command within a container?
 
-If we know the path of an executable that we want to run within a container, we can use the `singularity exec` command. For example, using the `lolcow.sif` container that we've already pulled from Singularity Hub, we can run the following within the `test` directory where the `lolcow.sif` file is located:
+If we know the path of an executable that we want to run within a container, we can use the `singularity exec` command. For example, using a container based on the lightweight Alpine Linux distribution which we can pull from Docker Hub we can run the following to first create a Singularity container image file from the image on Docker Hub and then print a message from a running container:
 
 ~~~
-singularity exec lolcow.sif /bin/echo Hello World!
+singularity pull alpine.sif docker://alpine
+singularity exec alpine.sif echo "Hello, world"
 ~~~
 {: .language-bash}
 
 ~~~
-Hello World!
+Hello, world
 ~~~
 {: .output}
 
-Here we see that a container has been started from the `lolcow.sif` image and the `/bin/echo` command has been run within the container, passing the input `Hello World!`. The command has echoed the provided input to the console and the container has terminated.
+Here we see that a container has been started from the `alpine.sif` image and the `echo` command has been run within the container, passing the input `Hello, world`. The command has echoed the provided input to the console and the container has terminated.
 
 Note that the use of `singularity exec` has overriden any run script set within the image metadata and the command that we specified as an argument to `singularity exec` has been run instead.
 
 > ## Basic exercise: Running a different command within the "hello-world" container
 >
-> Can you run a container based on the `lolcow.sif` image that *prints the current date and time*?
+> Can you run a container based on the `alpine.sif` image that *prints the current date and time*?
 > 
 > > ## Solution
 > >
 > > ~~~
-> > singularity exec lolcow.sif /bin/date
+> > singularity exec alpine.sif /bin/date
 > > ~~~
 > > {: .language-bash}
 > > 
@@ -292,10 +308,10 @@ two commands is:
 
 ## Opening an interactive shell within a container
 
-If you want to open an interactive shell within a container, Singularity provides the `singularity shell` command. Again, using the `lolcow.sif` image, and within our `test` directory, we can run a shell within a container from the hello-world image:
+If you want to open an interactive shell within a container, Singularity provides the `singularity shell` command. Again, using the `alpine.sif` image, and within our `test` directory, we can run a shell within a container from the hello-world image:
 
 ~~~
-$ singularity shell lolcow.sif
+$ singularity shell alpine.sif
 ~~~
 {: .language-bash}
 
@@ -303,11 +319,11 @@ $ singularity shell lolcow.sif
 Singularity> whoami
 [<your username>]
 Singularity> ls
-lolcow.sif
+hello-world.sif alpine.sif
 Singularity> 
 ~~~
 {: .output}
 
-As shown above, we have opened a shell in a new container started from the `lolcow.sif` image. Note that the shell prompt has changed to show we are now within the Singularity container.
+As shown above, we have opened a shell in a new container started from the `alpine.sif` image. Note that the shell prompt has changed to show we are now within the Singularity container.
 
 Use the `exit` command to exit from the container shell.
